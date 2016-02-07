@@ -18,15 +18,21 @@ app.post('/', (req, res) => {
   // console.log('[server] req.body: ', req.body);
   if (!req.body || !req.body.repository) return;
   const repoName = req.body.repository.name;
+  const buildPath = `/var/www/${repoName}/build.sh`;
   console.log('[server] repoName: ', repoName);
 
-  const child = execFile('bash', [`/var/www/${repoName}/build.sh`],
-    (error, stdout, stderr) => {
-      console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
-      if (error !== null) {
-        console.log(`execFile error: ${error}`);
-      }
+  const child = execFile('bash', [`/var/www/${repoName}/build.sh`]);
+
+  child.stdout.on('data', (data) => {
+    console.log('stdout: ' + data);
+  });
+
+  child.stderr.on('data', (data) => {
+    console.log('stdout: ' + data);
+  });
+
+  child.on('close', (code) => {
+    console.log('closing code: ' + code);
   });
 });
 
