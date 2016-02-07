@@ -1,9 +1,10 @@
-var express = require('express');
+const express = require('express');
 
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var express = require('express');
-var fs = require('fs');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const fs = require('fs');
+const execFile = require('child_process').execFile;
 
 var app = express();
 
@@ -13,12 +14,20 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   console.log('[server] @GET -> req.body: ', req.body);
   res.send('<h1>HELLO</h1>');
 });
 
-app.post('/', function(req, res) {
+app.post('/', (req, res) => {
+  const child = execFile('pwd',
+    (error, stdout, stderr) => {
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+      if (error !== null) {
+        console.log(`execFile error: ${error}`);
+      }
+  });
   console.log('[server] @POST -> req.body: ', req.body);
   res.send('@POST: github deploy');
 });
