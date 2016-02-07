@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // pwd is /var/www/github-autodeploy
   console.log('[server] PUSHED TO GITHUB');
-  console.log('[server] req.body: ', req.body);
+  // console.log('[server] req.body: ', req.body);
   if (!req.body || !req.body.repository) return;
   const repoName = req.body.repository.name;
   console.log('[server] repoName: ', repoName);
