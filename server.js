@@ -14,11 +14,24 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   console.log('[server] @GET -> req.body: ', req.body);
-  res.send('<h1>HELLO</h1>');
+  // res.send('<h1>HELLO</h1>');
 });
 
 app.post('/', (req, res) => {
-  const child = execFile('pwd',
+  // pwd is /var/www/github-autodeploy
+  const repoName = req.body.repository.name;
+
+  // req.body.repository.name
+  // const child = execFile('pwd',
+  //   (error, stdout, stderr) => {
+  //     console.log(`stdout: ${stdout}`);
+  //     console.log(`stderr: ${stderr}`);
+  //     if (error !== null) {
+  //       console.log(`execFile error: ${error}`);
+  //     }
+  // });
+
+  const child = execFile('bash', [`/var/www/${repoName}/build.sh`],
     (error, stdout, stderr) => {
       console.log(`stdout: ${stdout}`);
       console.log(`stderr: ${stderr}`);
@@ -26,8 +39,9 @@ app.post('/', (req, res) => {
         console.log(`execFile error: ${error}`);
       }
   });
-  console.log('[server] @POST -> req.body: ', req.body);
-  res.send('@POST: github deploy');
+
+  // console.log('[server] @POST -> req.body: ', req.body);
+  // res.send('@POST: github deploy');
 });
 
 
