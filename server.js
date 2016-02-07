@@ -13,13 +13,14 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get('/github', function(req, res) {
-  // res.send('<h1>HELLO</h1>');
+app.get('/', function(req, res) {
+  console.log('[server] @GET -> req.body: ', req.body);
+  res.send('<h1>HELLO</h1>');
 });
 
-app.post('/github', function(req, res) {
-  // console.log('[server] req.body: ', req.body);
-  // res.send('@POST: github deploy');
+app.post('/', function(req, res) {
+  console.log('[server] @POST -> req.body: ', req.body);
+  res.send('@POST: github deploy');
 });
 
 
