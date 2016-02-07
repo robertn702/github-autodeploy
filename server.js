@@ -13,11 +13,11 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get('/github/deploy', function(req, res) {
+app.get('/github', function(req, res) {
   res.send('@GET: github deploy')
 });
 
-app.post('/github/deploy', function(req, res) {
+app.post('/github', function(req, res) {
   console.log('[server] req.body: ', req.body);
   res.send('@POST: github deploy');
 });
