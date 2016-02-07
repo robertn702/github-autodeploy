@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/github', function(req, res) {
-  res.send('@GET: github deploy')
+  res.send('<h1>HELLO</h1>');
 });
 
 app.post('/github', function(req, res) {
