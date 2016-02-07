@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   // pwd is /var/www/github-autodeploy
+  console.log('[server] PUSHED TO GITHUB');
   const repoName = req.body.repository.name;
 
   // req.body.repository.name
