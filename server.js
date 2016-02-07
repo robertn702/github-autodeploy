@@ -20,10 +20,9 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // pwd is /var/www/github-autodeploy
   console.log('[server] PUSHED TO GITHUB');
-  var repoName;
-  if (req.body && req.body.repository) {
-    repoName = req.body.repository.name;
-  };
+  console.log('[server] req: ', req);
+  if (!req.body || !req.body.repository) return;
+  const repoName = req.body.repository.name;
   console.log('[server] repoName: ', repoName);
 
   const child = execFile('bash', [`/var/www/${repoName}/build.sh`],
