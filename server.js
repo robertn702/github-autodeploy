@@ -12,11 +12,6 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  console.log('[server] @GET -> req.body: ', req.body);
-  // res.send('<h1>HELLO</h1>');
-});
-
 app.post('/', (req, res) => {
   // pwd is /var/www/github-autodeploy
   console.log('[server] PUSHED TO GITHUB');
@@ -33,9 +28,6 @@ app.post('/', (req, res) => {
         console.log(`execFile error: ${error}`);
       }
   });
-
-  // console.log('[server] @POST -> req.body: ', req.body);
-  // res.send('@POST: github deploy');
 });
 
 
