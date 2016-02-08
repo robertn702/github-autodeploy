@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const fs = require('fs');
-const childProcess = require('child_process').execFile;
+const childProcess = require('child_process');
 const execFile = childProcess.execFile;
 const exec = childProcess.exec;
 
