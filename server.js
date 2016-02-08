@@ -6,6 +6,8 @@ const childProcess = require('child_process').execFile;
 const execFile = childProcess.execFile;
 const exec = childProcess.exec;
 
+const ROOT_PATH = `/var/www`;
+
 var app = express();
 
 var port = process.env.PORT || 3001;
@@ -32,8 +34,7 @@ app.post('/', (req, res) => {
   console.log('[server] PUSHED TO GITHUB');
   if (!req.body || !req.body.repository) return;
   const repoName = req.body.repository.name;
-  const repoRootPath = `/var/www`;
-  const repoPath = `${repoRootPath}/${repoName}`;
+  const repoPath = `${ROOT_PATH}/${repoName}`;
   const buildPath = `${repoPath}/build.sh`;
 
   logWrapper(execFile('bash', ['./pre_build.sh', repoPath]));
