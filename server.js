@@ -42,7 +42,7 @@ app.post('/', (req, res) => {
   const buildPath = `${repoPath}/build.sh`;
 
   logWrapper(execFile('bash', ['./pre_build.sh', repoPath]), () => {
-    logWrapper(exec(`cd ${repoPath};bash ${buildPath}`));
+    // logWrapper(exec(`cd ${repoPath};bash ${buildPath}`));
     // logWrapper(execFile('bash', [buildPath]));
   });
 });
