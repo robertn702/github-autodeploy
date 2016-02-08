@@ -7,6 +7,7 @@ const execFile = childProcess.execFile;
 const exec = childProcess.exec;
 
 const ROOT_PATH = `/var/www`;
+const PRE_BUILD_PATH = './pre_build.sh';
 
 var app = express();
 
@@ -38,7 +39,7 @@ app.post('/', (req, res) => {
   const buildPath = `${repoPath}/build.sh`;
 
   logWrapper(execFile('bash', ['./pre_build.sh', repoPath]));
-  logWrapper(execFile('bash', [`/var/www/${repoName}/build.sh`]));
+  logWrapper(execFile('bash', [buildPath]));
 });
 
 
