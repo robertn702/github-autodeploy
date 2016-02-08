@@ -3,8 +3,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const fs = require('fs');
 const childProcess = require('child_process');
-const execFile = childProcess.execFile;
 const exec = childProcess.exec;
+const execFile = childProcess.execFile;
+const execFileSync = childProcess.execFileSync
 
 const ROOT_PATH = `/var/www`;
 const PRE_BUILD_PATH = './pre_build.sh';
@@ -38,8 +39,8 @@ app.post('/', (req, res) => {
   const repoPath = `${ROOT_PATH}/${repoName}`;
   const buildPath = `${repoPath}/build.sh`;
 
-  logWrapper(execFile('bash', ['./pre_build.sh', repoPath]));
-  logWrapper(execFile('bash', [buildPath]));
+  logWrapper(execFileSync('bash', ['./pre_build.sh', repoPath]));
+  logWrapper(execFileSync('bash', [buildPath]));
 });
 
 
