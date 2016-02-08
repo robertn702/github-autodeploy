@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-function logWrapper(childProcess) {
+function logWrapper(childProcess, cb) {
   childProcess.stdout.on('data', (data) => {
     console.log('stdout: ' + data);
   });
@@ -29,18 +29,21 @@ function logWrapper(childProcess) {
 
   childProcess.on('close', (code) => {
     console.log('closing code: ' + code);
+    if (cb != null) {
+      cb(code);
+    }
   });
 }
 
 app.post('/', (req, res) => {
-  console.log('[server] PUSHED TO GITHUB');
   if (!req.body || !req.body.repository) return;
   const repoName = req.body.repository.name;
   const repoPath = `${ROOT_PATH}/${repoName}`;
   const buildPath = `${repoPath}/build.sh`;
 
-  logWrapper(execFileSync('bash', ['./pre_build.sh', repoPath]));
-  logWrapper(execFileSync('bash', [buildPath]));
+  logWrapper(execFile('bash', ['./pre_build.sh', repoPath]), () => {
+    logWrapper(execFile('bash', [buildPath]));
+  });
 });
 
 
