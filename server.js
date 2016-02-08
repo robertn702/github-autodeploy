@@ -5,7 +5,7 @@ const fs = require('fs');
 const childProcess = require('child_process');
 const exec = childProcess.exec;
 const execFile = childProcess.execFile;
-const execFileSync = childProcess.execFileSync
+const execFileSync = childProcess.execFileSync;
 
 const ROOT_PATH = `/var/www`;
 const PRE_BUILD_PATH = './pre_build.sh';
