@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "rm -rf ~/.node-gyp"
+rm -rf ~/.node-gyp
+
 echo "cd $1"
 cd $1
 
@@ -9,5 +12,5 @@ git fetch --all
 echo "git reset --hard origin/master"
 git reset --hard origin/master
 
-echo "bash $1/build/sh"
+echo "bash $1/build.sh"
 bash $1/build.sh
