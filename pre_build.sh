@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "rm -rf ~/.node-gyp"
-rm -rf ~/.node-gyp
-
 echo "cd $1"
 cd $1
 
